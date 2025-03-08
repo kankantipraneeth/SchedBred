@@ -1,0 +1,46 @@
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #c4c3ca;
+  background-color: #1f2029;
+  background-image: url("ml.png");
+  background-size: cover;
+  overflow-x: hidden;
+  background-attachment: fixed;
+}
+.main-container {
+  border: 2px solid black;
+  height: 100vh;
+  width: 100%;
+}
+.heading-container {
+  border: 2px solid black;
+}
+.inner-continer {
+  display: flex;
+  border: 2px solid black;
+  width: 100%;
+  height: 80%;
+}
+.left-container {
+  display: inline-flex;
+  border: 2px solid black;
+  width: 17%;
+  height: 50rem;
+}
+.commonday {
+  width: 100%;
+  height: 15%;
+  border: 2px solid red;
+  font-size: 30px;
+  font-weight: 600;
+  gap: 10%;
+}
+.right-container {
+  display: inline-flex;
+  width: 80%;
+  border: 2px solid black;
+  height: 50rem;
+}

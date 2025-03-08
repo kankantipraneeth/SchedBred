@@ -73,7 +73,10 @@ app.post("/signin", (req, res) => {
   console.log("Authentication Status:", isAuthenticated);
 
   if (isAuthenticated) {
-    return res.json({ message: "Login successful!", user });
+    // return res.json({ message: "Login successful!", user });
+    return res.redirect(
+      `/timetable?username=${user.username}&email=${user.email}`
+    );
   } else {
     let errorMessage = "Invalid email or password.";
 
@@ -81,7 +84,9 @@ app.post("/signin", (req, res) => {
     return res.render("index.ejs", { message: errorMessage });
   }
 });
-
+app.get("/timetable", (req, res) => {
+  res.render("timetable.ejs");
+});
 app.listen(port, (req, res) => {
   console.log(`Server is running on the port ${port}`);
 });
