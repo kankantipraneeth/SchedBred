@@ -7,37 +7,60 @@
     <link rel="stylesheet" type="text/css" href="timetable.css" />
   </head>
   <body>
-    <div class="main-container">
-      <div class="heading-container">
-        <h1>Create your TimeTable:</h1>
+    <div class="container">
+      <div class="showInfo">
+        <h2>
+          Step <% if(locals.i){ %> <%=i%> <%}%> of <%if(locals.lengthDays){%>
+          <%=lengthDays%> <%}%> : <% if(locals.currentDay){ %> <%=currentDay%>
+          <%}%>
+        </h2>
       </div>
-      <div class="inner-container">
-        <div class="left-container weeks-container">
-          <ul class="weeks-list">
-            <div class="commonday mon">
-              <li class="monday" value="monday">Monday</li>
-            </div>
-            <div class="commonday tus">
-              <li class="tuesday" value="tuesday">Tuesday</li>
-            </div>
-            <div class="commonday wed">
-              <li class="wednesday" value="wednesday">Wednesday</li>
-            </div>
-            <div class="commonday thus">
-              <li class="thursday" value="thursday">Thursday</li>
-            </div>
-            <div class="commonday fri">
-              <li class="friday" value="friday">Friday</li>
-            </div>
-            <div class="commonday sat">
-              <li class="saturday" value="saturday">Saturday</li>
-            </div>
-          </ul>
+
+      <div class="subjects">
+        <h3>Subjects:</h3>
+        <div id="subjects-container">
+          <% if (subjects.length > 0) { %> <%# This comment prevents
+          formattingissues %> <% subjects.forEach((subject, index) => { %>
+          <div>
+            <input type="text" value="<%= subject %>" readonly />
+            <button onclick="removeSubject('<%= index %>')">&times;</button>
+          </div>
+          <% }); %> <% } %>
         </div>
-        <div class="right-container wokingspace-container">
-          Enter your subjects for 'Dynamic content'
-        </div>
+        <button onclick="addSubjects()">+Add Subject</button>
+      </div>
+      <div class="nxtprv">
+        <button onclick="previous()"><-previous</button>
+        <button onclick="next()">next-></button>
+      </div>
+      <div class="save">
+        <button onclick="save()">save</button>
       </div>
     </div>
+    <script>
+      function addSubjects() {
+        let container = document.getElementById("subjects-container");
+        let newInput = document.createElement("div");
+        newInput.className = "newInput";
+        newInput.innerHTML = `
+          <input type= "text" name="subjects[]" placeholder="Enter Subject"></input>
+          <button onclick="this.parentElement.remove()">✖</button>
+        `;
+        container.appendChild(newInput);
+      }
+      function removeSubject(index) {
+        if (index === "new") {
+          // Handle newly added inputs that don't have numeric indices yet
+          event.target.parentElement.remove();
+        } else {
+          index = parseInt(index);
+          let container = document.getElementById("subjects-container");
+          let selectedInput = container.children;
+          if (index >= 0 && index < selectedInput.length) {
+            selectedInput[index].remove();
+          }
+        }
+      }
+    </script>
   </body>
 </html>

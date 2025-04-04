@@ -84,9 +84,31 @@ app.post("/signin", (req, res) => {
     return res.render("index.ejs", { message: errorMessage });
   }
 });
+const days = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+let timetable = {};
 app.get("/timetable", (req, res) => {
-  res.render("timetable.ejs");
+  let step = parseInt(req.query.step) || 1;
+  console.log(step);
+  let lengthDays = days.length;
+  console.log(`Length is ${lengthDays}`);
+  let currentDay = days[step - 1];
+  console.log(currentDay);
+  let subjects = timetable[currentDay] || [];
+  res.render("timetable.ejs", {
+    i: step,
+    lengthDays: lengthDays,
+    currentDay: currentDay,
+    subjects: subjects,
+  });
 });
+
 app.listen(port, (req, res) => {
   console.log(`Server is running on the port ${port}`);
 });

@@ -4,43 +4,71 @@ body {
   font-size: 15px;
   line-height: 1.7;
   color: #c4c3ca;
-  background-color: #1f2029;
+  /* background-color: #1f2029; */
   background-image: url("ml.png");
   background-size: cover;
   overflow-x: hidden;
   background-attachment: fixed;
-}
-.main-container {
-  border: 2px solid black;
-  height: 100vh;
-  width: 100%;
-}
-.heading-container {
-  border: 2px solid black;
-}
-.inner-continer {
   display: flex;
-  border: 2px solid black;
-  width: 100%;
-  height: 80%;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-.left-container {
-  display: inline-flex;
-  border: 2px solid black;
-  width: 17%;
-  height: 50rem;
-}
-.commonday {
-  width: 100%;
-  height: 15%;
+.container {
+  /* width: 50%;
+  height: 70%; */
+
   border: 2px solid red;
-  font-size: 30px;
-  font-weight: 600;
-  gap: 10%;
+  height: 100vh; /* Ensure parent has height */
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.right-container {
-  display: inline-flex;
+.showInfo {
+  height: 20%;
+  border: 2px solid purple;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+.subjects {
+  /* display: flex;
+  height: 50%;
+  border: 2px solid white;
+  justify-content: center; */
+
+  display: flex;
+  flex-direction: column; /* Ensure vertical stacking */
+  height: 50%; /* 50% of .container */
+  width: 80%; /* Adjust width as needed */
+  border: 2px solid white;
+  justify-content: flex-start; /* Prevent full-height stretching */
+  align-items: center;
+  padding: 10px;
+  overflow-y: auto; /* Prevent overflow */
+}
+.subjects button {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: red;
+}
+
+.nxtprv {
+  display: flex;
+  border: 2px solid green;
+  justify-content: space-around;
+  padding-top: 2%;
+  padding-bottom: 2%;
   width: 80%;
-  border: 2px solid black;
-  height: 50rem;
+}
+.save {
+  display: flex;
+  border: 2px solid yellow;
+  justify-content: center;
+  width: 80%;
+  padding-top: 6%;
+  padding-bottom: 5%;
 }
