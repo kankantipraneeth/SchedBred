@@ -15,7 +15,17 @@
     "id": 1741442608073,
     "username": "jw;;",
     "email": "hello@gmial.com",
-    "password": "hasls"
+    "password": "hasls",
+    "timetable": {
+      "Monday": [
+        "social",
+        "maths"
+      ],
+      "Tuesday": [
+        "hasls",
+        "social"
+      ]
+    }
   },
   {
     "id": 1741443148155,
@@ -39,6 +49,38 @@
     "id": 1741443537627,
     "username": "user1",
     "email": "user1@mail.com",
-    "password": "user1pas"
+    "password": "user1pas",
+    "timetable": {
+      "Monday": [
+        "Data Structures",
+        "Computer Networks",
+        "Web Technologies"
+      ],
+      "Tuesday": [
+        "Web Technologies",
+        "Data Structures",
+        "Oops"
+      ],
+      "Wednesday": [
+        "Computer Networks",
+        "Library",
+        "Sports"
+      ],
+      "Thursday": [
+        "Oops",
+        "Web Technologies",
+        "Data Structures"
+      ],
+      "Friday": [
+        "Data Structures",
+        "Data Structures",
+        "Web Technologies"
+      ],
+      "Saturday": [
+        "Sports",
+        "Sports",
+        "Sports"
+      ]
+    }
   }
 ]

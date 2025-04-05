@@ -30,8 +30,11 @@
         <button onclick="addSubjects()">+Add Subject</button>
       </div>
       <div class="nxtprv">
-        <button onclick="previous()"><-previous</button>
-        <button onclick="next()">next-></button>
+        <% if(i > 1) {%>
+        <button onclick="navigate(<%=i -1 %>)"><-previous</button>
+        <% } %> <% if(i < lengthDays){ %>
+        <button onclick="navigate(<%=i +1 %>)">next-></button>
+        <% } %>
       </div>
       <div class="save">
         <button onclick="save()">save</button>
@@ -60,6 +63,29 @@
             selectedInput[index].remove();
           }
         }
+      }
+      function navigate(step) {
+        const userId = <%=userId%>
+        window.location.href = `/timetable?step=${step}&userId=${userId}`;
+      }
+      function save() {
+        let subjects = [];
+        document
+          .querySelectorAll("#subjects-container input")
+          .forEach((input) => {
+            subjects.push(input.value);
+          });
+          fetch("/save-timetable",{
+            method: "POST",
+            headers: {"Content-Type" : "application/json"},
+            body: JSON.stringify({
+              step: <%= i%>,
+              subjects : subjects,
+              userId : <%= userId%>
+            })
+          })
+          .then(response => response.json())
+          .then(data => alert(data.message));
       }
     </script>
   </body>

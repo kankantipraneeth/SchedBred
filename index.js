@@ -5,6 +5,7 @@ import fs from "fs";
 const app = express();
 const port = 3000;
 
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -75,7 +76,7 @@ app.post("/signin", (req, res) => {
   if (isAuthenticated) {
     // return res.json({ message: "Login successful!", user });
     return res.redirect(
-      `/timetable?username=${user.username}&email=${user.email}`
+      `/timetable?username=${user.username}&email=${user.email}&userId=${user.id}`
     );
   } else {
     let errorMessage = "Invalid email or password.";
@@ -92,20 +93,61 @@ const days = [
   "Friday",
   "Saturday",
 ];
+
 let timetable = {};
+
 app.get("/timetable", (req, res) => {
+  let userId = parseInt(req.query.userId);
   let step = parseInt(req.query.step) || 1;
-  console.log(step);
+
   let lengthDays = days.length;
-  console.log(`Length is ${lengthDays}`);
   let currentDay = days[step - 1];
-  console.log(currentDay);
-  let subjects = timetable[currentDay] || [];
+  let subjects = [];
+
+  if (fs.existsSync("data.json")) {
+    let users = JSON.parse(fs.readFileSync("data.json", "utf8"));
+    let user = users.find((u) => u.id == userId);
+
+    if (user && user.timetable && user.timetable[currentDay]) {
+      subjects = user.timetable[currentDay];
+    }
+  }
   res.render("timetable.ejs", {
     i: step,
     lengthDays: lengthDays,
     currentDay: currentDay,
     subjects: subjects,
+    userId: userId,
+  });
+});
+
+app.post("/save-timetable", (req, res) => {
+  let { step, subjects, userId } = req.body;
+  userId = Number(userId);
+
+  if (!step || !Array.isArray(subjects) || !userId) {
+    return res.status(400).json({ message: "Invalid data format" });
+  }
+
+  let currentDay = days[step - 1];
+
+  fs.readFile("data.json", "utf8", (err, data) => {
+    if (err) return res.status(500).json({ message: "Failed to read data" });
+
+    let users = JSON.parse(data);
+    let user = users.find((u) => u.id === userId);
+
+    if (!user) return res.status(404).json({ message: "User not found." });
+
+    if (!user.timetable) user.timetable = {};
+    user.timetable[currentDay] = subjects;
+
+    fs.writeFile("data.json", JSON.stringify(users, null, 2), (err) => {
+      if (err)
+        return res.status(500).json({ message: "Failed to save timetable." });
+
+      res.json({ message: "Timetable saved successfully." });
+    });
   });
 });
 
