@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planner</title>
+    <link rel="stylesheet" type="text/css" href="planner.css" />
+  </head>
+  <body>
+    <form action="/save-requirements" method="POST">
+      <div class="container">
+        <div class="inner-container">
+          <h1>Subject Requirements by Day</h1>
+
+          <% for (let day in timetable) { %>
+          <details open>
+            <summary><%= day %></summary>
+            <% timetable[day].forEach(subject => { %>
+            <div class="subject-row">
+              📘 <%= subject %>:
+              <input
+                type="text"
+                name="requirements[<%= day %>][<%= subject %>]"
+                placeholder="Enter requirement"
+              />
+            </div>
+            <% }) %>
+          </details>
+          <% } %>
+
+          <div class="time">
+            ⏰ Daily Notification Time:
+            <input type="time" name="notificationTime" required />
+          </div>
+
+          <input type="hidden" name="userId" value="<%= userId %>" />
+          <button type="submit">💾 Save All Requirements</button>
+        </div>
+      </div>
+    </form>
+    <script></script>
+  </body>
+</html>

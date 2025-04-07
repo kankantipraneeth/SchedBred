@@ -81,6 +81,43 @@
         "Sports",
         "Sports"
       ]
-    }
+    },
+    "requirements": {
+      "Monday": {
+        "Data Structures": "Laptop",
+        "Computer Networks": "complete assignment 1",
+        "Web Technologies": "Laptop with node js installed"
+      },
+      "Tuesday": {
+        "Web Technologies": "complete node js assignment",
+        "Data Structures": "update datastructure chatper 1 notes",
+        "Oops": "complete the part 1 of the java crash course"
+      },
+      "Wednesday": {
+        "Computer Networks": "complete tutorial 1",
+        "Library": "bring library cards, take the cn text book",
+        "Sports": "bring the bat"
+      },
+      "Thursday": {
+        "Oops": "bring observation and record ",
+        "Web Technologies": "observation and record",
+        "Data Structures": "bring the assignment sheets"
+      },
+      "Friday": {
+        "Data Structures": [
+          "bring laptop",
+          ""
+        ],
+        "Web Technologies": "bring laptop"
+      },
+      "Saturday": {
+        "Sports": [
+          "bring bat and ball",
+          "",
+          ""
+        ]
+      }
+    },
+    "notificationTime": "21:00"
   }
 ]

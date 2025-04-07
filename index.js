@@ -2,6 +2,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
 import fs from "fs";
+
+import nodemailer from "nodemailer";
+import http from "http";
+
 const app = express();
 const port = 3000;
 
@@ -148,6 +152,54 @@ app.post("/save-timetable", (req, res) => {
 
       res.json({ message: "Timetable saved successfully." });
     });
+  });
+});
+
+app.get("/planner", (req, res) => {
+  let userId = req.query.userId;
+  let lengthDays = days.length;
+  userId = Number(userId);
+  let timetable = {};
+
+  if (fs.existsSync("data.json")) {
+    const users = JSON.parse(fs.readFileSync("data.json", "utf8"));
+    const user = users.find((u) => u.id === userId);
+    if (user && user.timetable) {
+      timetable = user.timetable;
+    }
+    console.log(timetable);
+  }
+  let day = Object.keys(timetable);
+  let subjects = timetable[day];
+  res.render("planner.ejs", {
+    userId,
+    timetable,
+    lengthDays,
+  });
+});
+
+app.post("/save-requirements", (req, res) => {
+  let userId = req.body.userId;
+  userId = Number(userId);
+  const requirements = req.body.requirements;
+  const notificationTime = req.body.notificationTime;
+  let timetable = {};
+
+  if (!fs.existsSync("data.json")) {
+    return res.status(404).json({ message: "user not found" });
+  }
+
+  let users = JSON.parse(fs.readFileSync("data.json", "utf8"));
+  let user = users.find((u) => u.id === userId);
+
+  user.requirements = requirements;
+  user.notificationTime = notificationTime;
+
+  fs.writeFile("data.json", JSON.stringify(users, null, 2), (err) => {
+    if (err) {
+      return res.status(500).json({ message: "Failed to save requirements." });
+    }
+    res.json({ message: "Requirements saved Successfully!" });
   });
 });
 

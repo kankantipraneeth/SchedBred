@@ -39,53 +39,73 @@
       <div class="save">
         <button onclick="save()">save</button>
       </div>
+      <div class="next-page" style="display: none" id="continueButton">
+        <button onclick="goToPlanner()">Continue to Planner</button>
+      </div>
     </div>
     <script>
-      function addSubjects() {
-        let container = document.getElementById("subjects-container");
-        let newInput = document.createElement("div");
-        newInput.className = "newInput";
-        newInput.innerHTML = `
-          <input type= "text" name="subjects[]" placeholder="Enter Subject"></input>
-          <button onclick="this.parentElement.remove()">✖</button>
-        `;
-        container.appendChild(newInput);
-      }
-      function removeSubject(index) {
-        if (index === "new") {
-          // Handle newly added inputs that don't have numeric indices yet
-          event.target.parentElement.remove();
-        } else {
-          index = parseInt(index);
-          let container = document.getElementById("subjects-container");
-          let selectedInput = container.children;
-          if (index >= 0 && index < selectedInput.length) {
-            selectedInput[index].remove();
-          }
-        }
-      }
-      function navigate(step) {
-        const userId = <%=userId%>
-        window.location.href = `/timetable?step=${step}&userId=${userId}`;
-      }
-      function save() {
+                  function addSubjects() {
+                    let container = document.getElementById("subjects-container");
+                    let newInput = document.createElement("div");
+                    newInput.className = "newInput";
+                    newInput.innerHTML = `
+                      <input type= "text" name="subjects[]" placeholder="Enter Subject"></input>
+                      <button onclick="this.parentElement.remove()">✖</button>
+                    `;
+                    container.appendChild(newInput);
+                  }
+                  function removeSubject(index) {
+                    if (index === "new") {
+                      // Handle newly added inputs that don't have numeric indices yet
+                      event.target.parentElement.remove();
+                    } else {
+                      index = parseInt(index);
+                      let container = document.getElementById("subjects-container");
+                      let selectedInput = container.children;
+                      if (index >= 0 && index < selectedInput.length) {
+                        selectedInput[index].remove();
+                      }
+                    }
+                  }
+                  function navigate(step) {
+                    const userId = <%=userId%>
+                    window.location.href = `/timetable?step=${step}&userId=${userId}`;
+                  }
+                  async function save() {
         let subjects = [];
         document
           .querySelectorAll("#subjects-container input")
           .forEach((input) => {
             subjects.push(input.value);
           });
-          fetch("/save-timetable",{
+
+        try {
+          const response = await fetch("/save-timetable", {
             method: "POST",
-            headers: {"Content-Type" : "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              step: <%= i%>,
-              subjects : subjects,
-              userId : <%= userId%>
+              step: <%= i %>,
+              subjects: subjects,
+              userId: <%= userId %>
             })
-          })
-          .then(response => response.json())
-          .then(data => alert(data.message));
+          });
+
+          const data = await response.json();
+          alert(data.message);
+
+          if (<%= i %> === <%= lengthDays %>) {
+            document.getElementById("continueButton").style.display = "block";
+          } else {
+            window.location.href = `/timetable?step=${<%= i %> + 1}&userId=<%= userId %>`;
+          }
+        } catch (error) {
+          console.error("Error saving timetable:", error);
+          alert("Something went wrong while saving.");
+        }
+      }
+      function goToPlanner() {
+        const userId = <%= userId %>
+        windows.location.href = `/planner?userId=${userId}`;
       }
     </script>
   </body>
