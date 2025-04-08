@@ -106,18 +106,112 @@
       "Friday": {
         "Data Structures": [
           "bring laptop",
-          ""
+          "bring laptop"
         ],
         "Web Technologies": "bring laptop"
       },
       "Saturday": {
         "Sports": [
           "bring bat and ball",
-          "",
-          ""
+          "bring bat and ball",
+          "bring bat and ball"
         ]
       }
     },
     "notificationTime": "21:00"
+  },
+  {
+    "id": 1744053450972,
+    "username": "user2",
+    "email": "user2@mail.com",
+    "password": "user2pass",
+    "timetable": {
+      "Saturday": [
+        "c language"
+      ],
+      "Monday": [
+        "maths"
+      ],
+      "Tuesday": [
+        "social"
+      ],
+      "Wednesday": [
+        "Data Structures"
+      ],
+      "Thursday": [
+        "Computer Networks"
+      ],
+      "Friday": [
+        "Oops"
+      ]
+    },
+    "requirements": {
+      "Saturday": {
+        "c language": "laptop"
+      },
+      "Monday": {
+        "maths": ""
+      },
+      "Tuesday": {
+        "social": ""
+      },
+      "Wednesday": {
+        "Data Structures": ""
+      },
+      "Thursday": {
+        "Computer Networks": ""
+      },
+      "Friday": {
+        "Oops": ""
+      }
+    },
+    "notificationTime": "10:47"
+  },
+  {
+    "id": 1744092439199,
+    "username": "user Four",
+    "email": "user4@mail.com",
+    "password": "user4pass",
+    "timetable": {
+      "Monday": [
+        "maths"
+      ],
+      "Tuesday": [
+        "Data Structures"
+      ],
+      "Wednesday": [
+        "Oops"
+      ],
+      "Thursday": [
+        "Computer Networks"
+      ],
+      "Friday": [
+        "c language"
+      ],
+      "Saturday": [
+        "sports"
+      ]
+    },
+    "requirements": {
+      "Monday": {
+        "maths": "assignment1"
+      },
+      "Tuesday": {
+        "Data Structures": "update datastructure chatper 1 notes"
+      },
+      "Wednesday": {
+        "Oops": "oops record"
+      },
+      "Thursday": {
+        "Computer Networks": "observation and record"
+      },
+      "Friday": {
+        "c language": ""
+      },
+      "Saturday": {
+        "sports": ""
+      }
+    },
+    "notificationTime": "17:45"
   }
 ]

@@ -8,6 +8,7 @@
   </head>
   <body>
     <div class="container">
+      <h1 id="page-heading">Enter your subjects for each day:</h1>
       <div class="showInfo">
         <h2>
           Step <% if(locals.i){ %> <%=i%> <%}%> of <%if(locals.lengthDays){%>
@@ -105,7 +106,7 @@
       }
       function goToPlanner() {
         const userId = <%= userId %>
-        windows.location.href = `/planner?userId=${userId}`;
+        window.location.href = `/planner?userId=${userId}`;
       }
     </script>
   </body>

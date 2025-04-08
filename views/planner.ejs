@@ -38,6 +38,10 @@
         </div>
       </div>
     </form>
-    <script></script>
+
+    <form action="/send-mail" method="POST">
+      <input type="hidden" name="userId" value="<%= userId %>" />
+      <button type="submit">📧 Send Reminder Mail</button>
+    </form>
   </body>
 </html>
